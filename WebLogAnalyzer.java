@@ -62,24 +62,36 @@ public class WebLogAnalyzer {
    static void analyzeLog(String filename) throws IOException {
     try (BufferedReader br = new BufferedReader(new FileReader("samples/" + filename))) {
         String line;
+        String currentIP = null;
+        
         while ((line = br.readLine()) != null) {
-            LogEntry entry = new LogEntry(line);
-            // SKIP INVALID ENTRIES
-            if (entry.ip == null || entry.url == null) continue;
+            line = line.trim();
             
-            ipRequests.put(entry.ip, ipRequests.getOrDefault(entry.ip, 0) + 1);
-            int score = calculateRiskScore(entry);
-            entry.riskScore = score;
+            // NEW IP BLOCK DETECTED (starts with IP:)
+            if (line.contains(":") && line.matches(".*\\d+\\.\\d+\\.\\d+\\.\\d+.*")) {
+                currentIP = line.split(":")[0].trim();
+                continue;
+            }
             
-            if (score > 30) {
-                suspiciousLogs.add(entry);
-                detectAttackPatterns(entry);
+            // Skip empty lines and headers
+            if (line.isEmpty() || line.contains("TIME") || line.contains("METHOD")) continue;
+            
+            if (currentIP != null && line.length() > 20) {
+                LogEntry entry = new LogEntry(currentIP + " " + line);
+                if (entry.ip != null) {
+                    ipRequests.put(entry.ip, ipRequests.getOrDefault(entry.ip, 0) + 1);
+                    int score = calculateRiskScore(entry);
+                    entry.riskScore = score;
+                    
+                    if (score > 30) {
+                        suspiciousLogs.add(entry);
+                        detectAttackPatterns(entry);
+                    }
+                }
             }
         }
     }
-}
-
-    
+}   
     static int calculateRiskScore(LogEntry entry) {
     // NULL SAFETY CHECKS
     if (entry.ip == null || entry.url == null) return 0;
@@ -131,29 +143,47 @@ public class WebLogAnalyzer {
         return "SUSPICIOUS";
     }
     
-    static void generateMLReport() {
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println("🤖 ML-POWERED WEB LOG SECURITY ANALYZER - DAY 3");
-        System.out.println("=".repeat(60));
-        
-        long totalLogs = ipRequests.values().stream().mapToInt(Integer::intValue).sum();
-        int highRisk = (int)suspiciousLogs.stream().filter(e -> e.riskScore >= 70).count();
-        
-        System.out.printf("📊 TOTAL LOGS ANALYZED: %,d\n", totalLogs);
-        System.out.printf("🚨 HIGH RISK ATTACKS (70+): %d (%.1f%%)\n", 
-                         highRisk, (highRisk*100.0/totalLogs));
-        
-        System.out.println("\n🎯 TOP ATTACK PATTERNS:");
-        attackPatterns.entrySet().stream()
-            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-            .limit(5)
-            .forEach(e -> System.out.printf("  %s: %d occurrences\n", e.getKey(), e.getValue()));
-        
-        System.out.println("\n🔍 TOP SUSPICIOUS IPS:");
-        ipRequests.entrySet().stream()
-            .filter(e -> ipRequests.get(e.getKey()) > 10)
-            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-            .limit(3)
-            .forEach(e -> System.out.printf("  %s: %d requests\n", e.getKey(), e.getValue()));
-    }
+static void generateMLReport() {
+    System.out.println("\n" + "=".repeat(70));
+    System.out.println("🤖 ML-POWERED WEB LOG SECURITY ANALYZER - DAY 3");
+    System.out.println("=".repeat(70));
+    
+    long totalLogs = ipRequests.values().stream().mapToInt(Integer::intValue).sum();
+    int highRisk = (int)suspiciousLogs.stream().filter(e -> e.riskScore >= 70).count();
+    int mediumRisk = (int)suspiciousLogs.stream().filter(e -> e.riskScore >= 50 && e.riskScore < 70).count();
+    
+    System.out.printf("📊 TOTAL LOGS ANALYZED: %,d\n", totalLogs);
+    System.out.printf("🚨 HIGH RISK ATTACKS (70+): %d (%.1f%%)\n", highRisk, (highRisk*100.0/totalLogs));
+    System.out.printf("⚠️  MEDIUM RISK (50-69): %d (%.1f%%)\n", mediumRisk, (mediumRisk*100.0/totalLogs));
+    
+    // NEW: IP + Risk Factor Table
+    System.out.println("\n🔥 TOP IPS BY RISK FACTOR:");
+    System.out.println("IP Address          | Requests | Avg Risk | Status");
+    System.out.println("-".repeat(45));
+    
+    // Group IPs by risk
+    Map<String, Integer> ipTotalRisk = new HashMap<>();
+    suspiciousLogs.forEach(e -> {
+        ipTotalRisk.put(e.ip, ipTotalRisk.getOrDefault(e.ip, 0) + e.riskScore);
+    });
+    
+    ipTotalRisk.entrySet().stream()
+        .filter(e -> ipRequests.get(e.getKey()) > 5)  // Only show active IPs
+        .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+        .limit(10)
+        .forEach(e -> {
+            String ip = e.getKey();
+            int totalRisk = e.getValue();
+            int avgRisk = totalRisk / ipRequests.getOrDefault(ip, 1);
+            String status = avgRisk >= 70 ? "🚨 HIGH" : avgRisk >= 50 ? "⚠️ MEDIUM" : "✅ LOW";
+            System.out.printf("%-18s | %7d | %7d | %s\n", ip, ipRequests.get(ip), avgRisk, status);
+        });
+    
+    System.out.println("\n🎯 TOP ATTACK PATTERNS:");
+    attackPatterns.entrySet().stream()
+        .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+        .limit(5)
+        .forEach(e -> System.out.printf("  %s: %d occurrences\n", e.getKey(), e.getValue()));
+}
+
 }
