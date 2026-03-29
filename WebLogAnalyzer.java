@@ -148,7 +148,6 @@ public class WebLogAnalyzer {
 
     ipRiskScores.entrySet().stream()
         .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-        .limit(10)
         .forEach(e -> {
             String ip = e.getKey();
             int requests = ipRequests.getOrDefault(ip, 0);
