@@ -1,396 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Log Security Dashboard</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --panel-2: #1f2937;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --border: #374151;
-      --accent: #06b6d4;
-      --high: #ef4444;
-      --medium: #f59e0b;
-      --low: #22c55e;
-      --card: #0b1220;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      padding: 24px;
-    }
-
-    .container {
-      max-width: 1300px;
-      margin: auto;
-    }
-
-    h1 {
-      margin-bottom: 8px;
-      color: var(--accent);
-    }
-
-    .subtitle {
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .btn {
-      background: var(--accent);
-      color: #001018;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-    }
-
-    .card h3 {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .section {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-
-    .section h2 {
-      margin-bottom: 16px;
-      color: var(--accent);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow-x: auto;
-    }
-
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-    }
-
-    th {
-      background: var(--panel-2);
-      color: var(--text);
-    }
-
-    tr:hover {
-      background: rgba(255,255,255,0.04);
-      cursor: pointer;
-    }
-
-    .badge {
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    .high { background: rgba(239,68,68,0.2); color: #fecaca; }
-    .medium { background: rgba(245,158,11,0.2); color: #fde68a; }
-    .low { background: rgba(34,197,94,0.2); color: #bbf7d0; }
-
-    .patterns {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-    }
-
-    .pattern-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-    }
-
-    .pattern-box h4 {
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-size: 13px;
-    }
-
-    .pattern-box p {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 24px;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: var(--panel);
-      max-width: 700px;
-      margin: 50px auto;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      padding: 24px;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .close {
-      font-size: 28px;
-      cursor: pointer;
-      color: var(--muted);
-    }
-
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .detail-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-    }
-
-    .detail-box h4 {
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-size: 13px;
-    }
-
-    .detail-box p {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 14px;
-      }
-
-      th, td {
-        font-size: 13px;
-        padding: 10px;
-      }
-
-      .card p {
-        font-size: 24px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebLog Security Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <div class="topbar">
+    <header class="header">
       <div>
-        <h1>Web Log Security Dashboard</h1>
-        <p class="subtitle">Interactive risk overview for suspicious IP activity</p>
+        <h1>🔍 WebLog Security Dashboard</h1>
+        <p class="subtitle">Monitor suspicious IP activity from analyzed web logs.</p>
       </div>
-      <button class="btn" onclick="loadDashboard()">Refresh Dashboard</button>
-    </div>
+      
+    </header>
 
-    <div class="stats">
-      <div class="card">
-        <h3>Total Logs</h3>
-        <p id="totalLogs">0</p>
-      </div>
-      <div class="card">
-        <h3>Unique IPs</h3>
-        <p id="uniqueIps">0</p>
-      </div>
-      <div class="card">
-        <h3>High Risk IPs</h3>
-        <p id="highRiskIps">0</p>
-      </div>
-      <div class="card">
-        <h3>Suspicious Logs</h3>
-        <p id="suspiciousLogs">0</p>
-      </div>
-    </div>
+    <section class="stats">
+      <div class="card"><h3>Total Logs</h3><p id="totalLogs">0</p></div>
+      <div class="card"><h3>Unique IPs</h3><p id="uniqueIps">0</p></div>
+      <div class="card"><h3>High Risk IPs</h3><p id="highRiskIps">0</p></div>
+      <div class="card"><h3>Suspicious Logs</h3><p id="suspiciousLogs">0</p></div>
+    </section>
 
-    <div class="section">
-      <h2>Attack Patterns</h2>
-      <div class="patterns" id="patternContainer"></div>
-    </div>
-
-    <div class="section">
+    <section class="table-section">
       <h2>IP Risk Table</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>IP Address</th>
-            <th>Requests</th>
-            <th>Risk Score</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="ipTableBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="modal" id="ipModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modalTitle">IP Details</h2>
-        <span class="close" onclick="closeModal()">&times;</span>
+      <div class="table-wrapper">
+        <table id="riskTable">
+          <thead>
+            <tr>
+              <th>IP Address</th>
+              <th>Requests</th>
+              <th>Risk Score</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="emptyMessage" class="empty-msg" style="display:none;">No log data found.</p>
       </div>
-      <div class="details-grid" id="modalDetails"></div>
+    </section>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <span id="closeModal" class="close">&times;</span>
+      <h2 id="modalTitle">IP Details</h2>
+      <div id="modalBody"></div>
     </div>
   </div>
 
-  <script>
-    let dashboardData = null;
-
-    async function loadDashboard() {
-      try {
-        const response = await fetch("./dashboard-data.json");
-        dashboardData = await response.json();
-
-        document.getElementById("totalLogs").textContent = dashboardData.totalLogs;
-        document.getElementById("uniqueIps").textContent = dashboardData.uniqueIps;
-        document.getElementById("highRiskIps").textContent = dashboardData.highRiskIps;
-        document.getElementById("suspiciousLogs").textContent = dashboardData.suspiciousLogs;
-
-        renderPatterns(dashboardData.attackPatterns);
-        renderIpTable(dashboardData.ipData);
-      } catch (error) {
-        alert("Could not load dashboard-data.json");
-        console.error(error);
-      }
-    }
-
-    function renderPatterns(patterns) {
-      const container = document.getElementById("patternContainer");
-      container.innerHTML = "";
-
-      Object.keys(patterns).forEach(key => {
-        const box = document.createElement("div");
-        box.className = "pattern-box";
-        box.innerHTML = `
-          <h4>${key}</h4>
-          <p>${patterns[key]}</p>
-        `;
-        container.appendChild(box);
-      });
-    }
-
-    function renderIpTable(ipData) {
-      const tbody = document.getElementById("ipTableBody");
-      tbody.innerHTML = "";
-
-      ipData.forEach(ip => {
-        const row = document.createElement("tr");
-        const badgeClass =
-          ip.status === "HIGH" ? "high" :
-          ip.status === "MEDIUM" ? "medium" : "low";
-
-        row.innerHTML = `
-          <td>${ip.ip}</td>
-          <td>${ip.requests}</td>
-          <td>${ip.risk}</td>
-          <td><span class="badge ${badgeClass}">${ip.status}</span></td>
-        `;
-
-        row.onclick = () => showIpDetails(ip);
-        tbody.appendChild(row);
-      });
-    }
-
-    function showIpDetails(ip) {
-      document.getElementById("modalTitle").textContent = `IP Details: ${ip.ip}`;
-      document.getElementById("modalDetails").innerHTML = `
-        <div class="detail-box">
-          <h4>IP Address</h4>
-          <p>${ip.ip}</p>
-        </div>
-        <div class="detail-box">
-          <h4>Total Requests</h4>
-          <p>${ip.requests}</p>
-        </div>
-        <div class="detail-box">
-          <h4>Risk Score</h4>
-          <p>${ip.risk}</p>
-        </div>
-        <div class="detail-box">
-          <h4>Status</h4>
-          <p>${ip.status}</p>
-        </div>
-      `;
-      document.getElementById("ipModal").style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("ipModal").style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      const modal = document.getElementById("ipModal");
-      if (event.target === modal) {
-        closeModal();
-      }
-    };
-
-    loadDashboard();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
