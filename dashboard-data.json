@@ -2,292 +2,167 @@
   "totalLogs": 1920,
   "uniqueIps": 77,
   "highRiskIps": 1,
-  "suspiciousLogs": 836,
+  "suspiciousLogs": 14,
   "attackPatterns": {
-    "SUSPICIOUS": 836
+    "ELEVATED_TRAFFIC": 13,
+    "HIGH_VOLUME": 1,
+    "WILDCARD_ENUMERATION": 1,
+    "AUTH_FLOOD": 1
   },
   "ipData": [
     {
       "ip": "192.168.0.101",
       "requests": 138,
-      "risk": 123,
-      "status": "HIGH"
-    },
-    {
-      "ip": "192.168.0.66",
-      "requests": 46,
-      "risk": 31,
-      "status": "MEDIUM"
-    },
-    {
-      "ip": "192.168.0.54",
-      "requests": 44,
-      "risk": 29,
-      "status": "LOW"
+      "risk": 165,
+      "status": "HIGH",
+      "notFoundErrors": 0,
+      "authErrors": 70,
+      "failedLogins": 0,
+      "uniqueURLs": 14,
+      "threats": "HIGH_VOLUME, WILDCARD_ENUMERATION, AUTH_FLOOD"
     },
     {
       "ip": "192.168.0.4",
       "requests": 43,
-      "risk": 28,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.82",
-      "requests": 42,
-      "risk": 27,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.59",
-      "requests": 41,
-      "risk": 26,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.80",
-      "requests": 41,
-      "risk": 26,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.63",
-      "requests": 39,
-      "risk": 24,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.32",
-      "requests": 39,
-      "risk": 24,
-      "status": "LOW"
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 3,
+      "failedLogins": 0,
+      "uniqueURLs": 17,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
       "ip": "192.168.0.3",
       "requests": 38,
-      "risk": 23,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.46",
-      "requests": 38,
-      "risk": 23,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.111",
-      "requests": 38,
-      "risk": 23,
-      "status": "LOW"
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 3,
+      "failedLogins": 0,
+      "uniqueURLs": 15,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
       "ip": "192.168.0.36",
       "requests": 37,
-      "risk": 22,
-      "status": "LOW"
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 2,
+      "failedLogins": 0,
+      "uniqueURLs": 12,
+      "threats": "ELEVATED_TRAFFIC"
+    },
+    {
+      "ip": "192.168.0.59",
+      "requests": 41,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 2,
+      "failedLogins": 0,
+      "uniqueURLs": 17,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
       "ip": "192.168.0.7",
       "requests": 37,
-      "risk": 22,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.94",
-      "requests": 35,
-      "risk": 20,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.55",
-      "requests": 35,
-      "risk": 20,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.40",
-      "requests": 33,
-      "risk": 18,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.120",
-      "requests": 33,
-      "risk": 18,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.102",
-      "requests": 30,
       "risk": 15,
-      "status": "LOW"
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 3,
+      "failedLogins": 0,
+      "uniqueURLs": 15,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.18",
-      "requests": 29,
-      "risk": 14,
-      "status": "LOW"
+      "ip": "192.168.0.63",
+      "requests": 39,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 2,
+      "failedLogins": 0,
+      "uniqueURLs": 16,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.84",
-      "requests": 29,
-      "risk": 14,
-      "status": "LOW"
+      "ip": "192.168.0.54",
+      "requests": 44,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 3,
+      "failedLogins": 0,
+      "uniqueURLs": 18,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.87",
-      "requests": 29,
-      "risk": 14,
-      "status": "LOW"
+      "ip": "192.168.0.32",
+      "requests": 39,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 3,
+      "failedLogins": 0,
+      "uniqueURLs": 15,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.77",
-      "requests": 29,
-      "risk": 14,
-      "status": "LOW"
+      "ip": "192.168.0.66",
+      "requests": 46,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 3,
+      "failedLogins": 0,
+      "uniqueURLs": 20,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.100",
-      "requests": 29,
-      "risk": 14,
-      "status": "LOW"
+      "ip": "192.168.0.46",
+      "requests": 38,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 2,
+      "failedLogins": 0,
+      "uniqueURLs": 16,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.61",
-      "requests": 28,
-      "risk": 13,
-      "status": "LOW"
+      "ip": "192.168.0.111",
+      "requests": 38,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 2,
+      "failedLogins": 0,
+      "uniqueURLs": 15,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.123",
-      "requests": 28,
-      "risk": 13,
-      "status": "LOW"
+      "ip": "192.168.0.80",
+      "requests": 41,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 2,
+      "failedLogins": 0,
+      "uniqueURLs": 16,
+      "threats": "ELEVATED_TRAFFIC"
     },
     {
-      "ip": "192.168.0.15",
-      "requests": 27,
-      "risk": 12,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.119",
-      "requests": 27,
-      "risk": 12,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.117",
-      "requests": 27,
-      "risk": 12,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.26",
-      "requests": 27,
-      "risk": 12,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.74",
-      "requests": 27,
-      "risk": 12,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.35",
-      "requests": 27,
-      "risk": 12,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.5",
-      "requests": 26,
-      "risk": 11,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.60",
-      "requests": 26,
-      "risk": 11,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.57",
-      "requests": 26,
-      "risk": 11,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.64",
-      "requests": 25,
-      "risk": 10,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.23",
-      "requests": 25,
-      "risk": 10,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.69",
-      "requests": 25,
-      "risk": 10,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.127",
-      "requests": 25,
-      "risk": 10,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.79",
-      "requests": 25,
-      "risk": 10,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.9",
-      "requests": 24,
-      "risk": 9,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.25",
-      "requests": 24,
-      "risk": 9,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.49",
-      "requests": 22,
-      "risk": 7,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.53",
-      "requests": 22,
-      "risk": 7,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.126",
-      "requests": 22,
-      "risk": 7,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.108",
-      "requests": 18,
-      "risk": 3,
-      "status": "LOW"
-    },
-    {
-      "ip": "192.168.0.73",
-      "requests": 16,
-      "risk": 1,
-      "status": "LOW"
+      "ip": "192.168.0.82",
+      "requests": 42,
+      "risk": 15,
+      "status": "LOW",
+      "notFoundErrors": 0,
+      "authErrors": 2,
+      "failedLogins": 0,
+      "uniqueURLs": 18,
+      "threats": "ELEVATED_TRAFFIC"
     }
   ]
 }
