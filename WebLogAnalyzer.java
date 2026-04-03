@@ -349,12 +349,13 @@ public class WebLogAnalyzer {
         try (PrintWriter out = new PrintWriter(new FileWriter("dashboard-data.json"))) {
             long totalLogs   = ipRequests.values().stream().mapToInt(Integer::intValue).sum();
             long highRiskIPs = ipRiskScores.values().stream().filter(r -> r >= 50).count();
+            long flaggedCount = ipRiskScores.values().stream().filter(r -> r > 0).count();  
 
             out.println("{");
             out.println("  \"totalLogs\": "     + totalLogs             + ",");
             out.println("  \"uniqueIps\": "      + ipRequests.size()     + ",");
             out.println("  \"highRiskIps\": "    + highRiskIPs           + ",");
-            out.println("  \"suspiciousLogs\": " + suspiciousLogs.size() + ",");
+            out.println("  \"suspiciousLogs\": " + flaggedCount      + ",");
 
             out.println("  \"attackPatterns\": {");
             List<Map.Entry<String, Integer>> patternList = new ArrayList<>(attackPatterns.entrySet());
